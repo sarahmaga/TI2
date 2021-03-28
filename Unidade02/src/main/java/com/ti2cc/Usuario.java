@@ -1,60 +1,60 @@
-package com.ti2cc;
+package com.TI2;
 
-public class Usuario {
-	private int codigo;
-	private String login;
-	private String senha;
-	private char sexo;
+public class Membro {
+	private int ID;
+	private String Nome;
+	private String Idade;
+	private char Inicial;
 	
-	public Usuario() {
-		this.codigo = -1;
-		this.login = "";
-		this.senha = "";
-		this.sexo = '*';
+	public Membro() {
+		this.ID = -1;
+		this.Nome = "";
+		this.Idade = "";
+		this.Inicial= '*';
 	}
 	
-	public Usuario(int codigo, String login, String senha, char sexo) {
-		this.codigo = codigo;
-		this.login = login;
-		this.senha = senha;
-		this.sexo = sexo;
+	public Membro(int ID, String Nome, String Idade, char Inicial) {
+		this.ID = ID;
+		this.Nome = Nome;
+		this.Idade = Idade;
+		this.Inicial = Inicial;
 	}
 
-	public int getCodigo() {
-		return codigo;
+	public int getID() {
+		return ID;
 	}
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getNome() {
+		return Nome;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setIdade(String Idade) {
+		this.Idade = Idade;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getInical() {
+		return Inicial;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setIdade(String Idade) {
+		this.Idade = Idade;
 	}
 
-	public char getSexo() {
-		return sexo;
+	public char getInicial() {
+		return Inicial;
 	}
 
-	public void setSexo(char sexo) {
-		this.sexo = sexo;
+	public void setInicial(char Inicial) {
+		this.Inicial = Inicial;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [codigo=" + codigo + ", login=" + login + ", senha=" + senha + ", sexo=" + sexo + "]";
+		return "Membro [ID=" + ID + ", Nome=" + Nome + ", Idade=" + Idade + ", Inicial=" + Inicial + "]";
 	}
 	
 }

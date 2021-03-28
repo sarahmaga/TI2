@@ -1,5 +1,5 @@
 package com.TI2;
-// test
+
 import java.sql.*;
 
 public class DAO {
@@ -45,13 +45,13 @@ public class DAO {
 		return status;
 	}
 	
-	public boolean inserirUsuario(Usuario usuario) {
+	public boolean inserirMembro(Membro membro) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
 			st.executeUpdate("INSERT INTO usuario (ID, Nome, Idade, Inicial) "
-					       + "VALUES ("+usuario.getCodigo()+ ", '" + usuario.getLogin() + "', '"  
-					       + usuario.getSenha() + "', '" + usuario.getSexo() + "');");
+					       + "VALUES ("+membro.getID()+ ", '" + membro.getNome() + "', '"  
+					       + membro.getIdade() + "', '" + membro.getInicial() + "');");
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -60,13 +60,13 @@ public class DAO {
 		return status;
 	}
 	
-	public boolean atualizarUsuario(Usuario usuario) {
+	public boolean atualizarMembro(Membro membro) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			String sql = "UPDATE usuario SET login = '" + usuario.getLogin() + "', senha = '"  
-				       + usuario.getSenha() + "', sexo = '" + usuario.getSexo() + "'"
-					   + " WHERE codigo = " + usuario.getCodigo();
+			String sql = "UPDATE membro SET Nome = '" + membro.getNome() + "', Idade = '"  
+				       + membro.getIdade() + "', Inicial = '" + membro.getInicial() + "'"
+					   + " WHERE ID = " + membro.getID();
 			st.executeUpdate(sql);
 			st.close();
 			status = true;
@@ -76,11 +76,11 @@ public class DAO {
 		return status;
 	}
 	
-	public boolean excluirUsuario(int codigo) {
+	public boolean excluirMembro(int ID) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM usuario WHERE codigo = " + codigo);
+			st.executeUpdate("DELETE FROM usuario WHERE ID = " + ID);
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -90,50 +90,50 @@ public class DAO {
 	}
 	
 	
-	public Usuario[] getUsuarios() {
-		Usuario[] usuarios = null;
+	public Membro[] getMembros() {
+		Membro[] membro = null;
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = st.executeQuery("SELECT * FROM usuario");		
+			ResultSet rs = st.executeQuery("SELECT * FROM membro");		
 	         if(rs.next()){
 	             rs.last();
-	             usuarios = new Usuario[rs.getRow()];
+	             membro = new Membro[rs.getRow()];
 	             rs.beforeFirst();
 
 	             for(int i = 0; rs.next(); i++) {
-	                usuarios[i] = new Usuario(rs.getInt("codigo"), rs.getString("login"), 
-	                		                  rs.getString("senha"), rs.getString("sexo").charAt(0));
+	                membros[i] = new Membro(rs.getInt("ID"), rs.getString("Nome"), 
+	                		                  rs.getString("Idade"), rs.getString("Inicial").charAt(0));
 	             }
 	          }
 	          st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return usuarios;
+		return membros;
 	}
 
 	
-	public Usuario[] getUsuariosMasculinos() {
+	public Membro[] getMembros() {
 		Usuario[] usuarios = null;
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = st.executeQuery("SELECT * FROM usuario WHERE usuario.sexo LIKE 'M'");		
+			ResultSet rs = st.executeQuery("SELECT MEMBER");		
 	         if(rs.next()){
 	             rs.last();
-	             usuarios = new Usuario[rs.getRow()];
+	             membros = new Membro[rs.getRow()];
 	             rs.beforeFirst();
 
 	             for(int i = 0; rs.next(); i++) {
-		                usuarios[i] = new Usuario(rs.getInt("codigo"), rs.getString("login"), 
-                         		                  rs.getString("senha"), rs.getString("sexo").charAt(0));
+		                membros[i] = new Membro(rs.getInt("ID"), rs.getString("Nome"), 
+                         		                  rs.getString("Idade"), rs.getString("Inicial").charAt(0));
 	             }
 	          }
 	          st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return usuarios;
+		return membros;
 	}
 }
